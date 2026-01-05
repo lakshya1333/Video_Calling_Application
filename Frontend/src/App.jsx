@@ -11,6 +11,7 @@ import toast, {Toaster} from 'react-hot-toast'
 import { useQuery } from '@tanstack/react-query'
 import {axiosInstance} from './lib/axios.js'
 import axios from 'axios'
+import PageLoader from './components/PageLoader.jsx'
 
 const App = () => {
 
@@ -26,6 +27,8 @@ const App = () => {
   })
 
   const authUser = authData?.user
+
+  if(isLoading) return <PageLoader/>
 
   return (
     <div className='h-screen' data-theme="night">
