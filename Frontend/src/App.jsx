@@ -12,21 +12,13 @@ import { useQuery } from '@tanstack/react-query'
 import {axiosInstance} from './lib/axios.js'
 import axios from 'axios'
 import PageLoader from './components/PageLoader.jsx'
+import { getAuthUser } from './lib/api.js'
+import useAuthuser from './hooks/useAuthuser.js'
 
 const App = () => {
 
-  //tanstack query
-  const {data:authData,isLoading,error} = useQuery({
-    queryKey: ["authUser"],
 
-    queryFn: async ()=>{
-      const res = await axiosInstance.get("/auth/me")
-      return res.data
-    },
-    retry: false
-  })
-
-  const authUser = authData?.user
+  const {isLoading,authUser} = useAuthuser()
 
   if(isLoading) return <PageLoader/>
 
